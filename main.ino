@@ -22,12 +22,12 @@ void setup()
 
     servoX.attach(axisX);
     servoY.attach(axisY);
-    
+
     servoX.write(0);
     servoY.write(0);
 }
 
-void update()
+void loop()
 {
 
 }
