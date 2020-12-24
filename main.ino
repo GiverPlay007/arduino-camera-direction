@@ -1,15 +1,15 @@
 #include<Servo.h>
 
-#define axisX 9
-#define axisY 10
+#define AXIS_X 9
+#define AXIS_Y 10
 
-#define xDir1 0
-#define xDir2 1
-#define yDir1 2
-#define yDir2 3
+#define X_DIR_1 0
+#define X_DIR_2 1
+#define Y_DIR_1 2
+#define Y_DIR_2 3
 
-#define xSpeedInput A0
-#define ySpeedInput A1
+#define X_SPEED_INPUT A0
+#define Y_SPEED_INPUT A1
 
 Servo servoX;
 Servo servoY;
@@ -25,17 +25,15 @@ int ySpeed = 1;
 
 void setup()
 {
-    Serial.begin(9600);
+    pinMode(X_DIR_1, INPUT);
+    pinMode(X_DIR_2, INPUT);
+    pinMode(Y_DIR_1, INPUT);
+    pinMode(Y_DIR_2, INPUT);
+    pinMode(X_SPEED_INPUT, INPUT);
+    pinMode(Y_SPEED_INPUT, INPUT);
 
-    pinMode(xDir1, INPUT);
-    pinMode(xDir2, INPUT);
-    pinMode(yDir1, INPUT);
-    pinMode(yDir2, INPUT);
-    pinMode(xSpeedInput, INPUT);
-    pinMode(ySpeedInput, INPUT);
-
-    servoX.attach(axisX);
-    servoY.attach(axisY);
+    servoX.attach(AXIS_X);
+    servoY.attach(AXIS_Y);
 
     servoX.write(0);
     servoY.write(0);
@@ -51,17 +49,17 @@ void loop()
 
 void checkSpeedX()
 {
-    xSpeed = (int) (10 / 1024 * analogRead(xSpeedInput));
+    xSpeed = (int) (10 / 1024 * analogRead(X_SPEED_INPUT));
 }
 
 void checkSpeedY()
 {
-    ySpeed = (int) (10 / 1024 * analogRead(ySpeedInput));
+    ySpeed = (int) (10 / 1024 * analogRead(Y_SPEED_INPUT));
 }
 
 void checkAxisX()
 {
-    if(digitalRead(xDir1))
+    if(digitalRead(X_DIR_1))
     {
         angleX += xSpeed;
 
@@ -71,7 +69,7 @@ void checkAxisX()
         }
     }
 
-    if(digitalRead(xDir2))
+    if(digitalRead(X_DIR_2))
     {
         angleX -= xSpeed;
 
@@ -90,7 +88,7 @@ void checkAxisX()
 
 void checkAxisY()
 {
-    if(digitalRead(yDir1))
+    if(digitalRead(Y_DIR_1))
     {
         angleY += ySpeed;
 
@@ -100,7 +98,7 @@ void checkAxisY()
         } 
     }
 
-    if(digitalRead(yDir2))
+    if(digitalRead(Y_DIR_2))
     {
         angleY -= ySpeed;
 
